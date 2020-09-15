@@ -1,0 +1,9 @@
+@echo off
+SETLOCAL ENABLEDELAYEDEXPANSION
+COLOR 0A
+
+:label1
+SET NPATH=\\xxx.xxx.xxx.xxx
+SET USER=xxx
+SET PASS=yyy
+NET USE %NPATH% /USER:%USER% %PASS%
