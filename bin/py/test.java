@@ -24,9 +24,18 @@
 	    // 証明書からserialNumber値を取得
 	    System.out.println(cert.getSerialNumber());
 
-	    // CertificateException
-	    CertPath cp = cf.generateCertPath(fis);
-	    System.out.println(cp.getType());
+        try {
+            CertPath cp = cf.generateCertPath(fis, "X.509");
+            List<? extends Certificate> certs = cp.getCertificates();
+            Iterator<? extends Certificate> i = certs.iterator();
+            System.out.println("証明書数 = " + certs.size());
+            while (i.hasNext()) {
+                X509Certificate cert2 = (X509Certificate)i.next();
+                System.out.println(cert2);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 //	    // print each certificate in the path
 //	    List<? extends Certificate> certs = cp.getCertificates();
 //	    for (Certificate cert : certs) {
