@@ -103,5 +103,54 @@ public class test {
 //	        System.out.println(cert);
 //	    }
 	}
+	
+	
+	
+        X509Extension x509e = null;
+        List<NwsX509Certificate> nwsX509CertificateList= new ArrayList<NwsX509Certificate>();
 
+        try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(Paths.get(storePath))) {
+            Iterator<Path> it = dirStream.iterator();
+            while(it.hasNext()) {
+                Path containFile = it.next();
+//                System.out.println(containFile);
+
+                String fileName = containFile.getFileName().toString();
+//                System.out.println(containFile.getParent());
+                CertificateFactory factory = null;
+                try {
+                    factory = CertificateFactory.getInstance("X.509");
+                } catch (CertificateException e) {
+                    throw new IllegalArgumentException(e);
+                }
+                try (BufferedInputStream targetStream = new BufferedInputStream(Files.newInputStream(containFile))) {
+                    x509e = (X509Certificate) factory.generateCertificate(targetStream);
+                    NwsX509Certificate nwsX509Certificate = new NwsX509Certificate(containFile,fileName, x509e);
+                    nwsX509CertificateList.add(nwsX509Certificate);
+//                    System.out.println(nwsX509Certificate.getType());
+//                    System.out.println("509Extensionを継承したオブジェクト");
+//                    System.out.println(x509e.getNonCriticalExtensionOIDs());
+                } catch (IOException | CertificateException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String spa = FileSystems.getDefault().getSeparator();
+
+        for(NwsX509Certificate nwsX509c : nwsX509CertificateList) {
+            X509Certificate x509ex =(X509Certificate) nwsX509c.getX509Extension();
+            if(nwsX509c.getType().equals("self") && NwsX509Certificate.getMaxNotAfter().equals(x509ex.getNotAfter())){
+                System.out.println(nwsX509c.getPath());
+                Path targetPath = Paths.get(nwsX509c.getPath().getParent() + spa + "NO_" + nwsX509c.getPath().getFileName());
+                try {
+                    Files.move(nwsX509c.getPath(), targetPath, StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
 }
