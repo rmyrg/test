@@ -1,0 +1,79 @@
+dos=doskey /macrofile=%USERPROFILE%\Documents\bin\macros.txt
+macro=start %USERPROFILE%\Documents\bin\macros.txt
+history=doskey /h
+c=code $*
+
+d=directory_select
+d>=dir /b/ad>dir.txt
+d!=dir.txt
+d<=dir /b/ad | clip
+
+e=explorer .
+
+f=file_select
+f>=dir /b/a-d>file.txt
+f!=file.txt
+f<=dir /b/a-d | clip
+
+g=sakura -GREPMODE -GKEY=$1 -GFILE=*.bat,*.vbs,*.py,*.sql,*.java,*.jsp,*.js,*.txt,*.ts -GFOLDER=%cd% -GCODE=99 -GOPT=SP
+grep=sakura -GREPMODE -GKEY=$1 -GFILE=*.bat,*.vbs,*.py,*.sql,*.java,*.jsp,*.js,*.txt,*.ts -GFOLDER=%cd% -GCODE=99 -GOPT=SP
+
+ls=dir /d
+pwd=dir
+rm=del $*
+mv=move $*
+cp=copy $*
+xcp=xcopy /o/h $*
+md=mkdir $*
+cat=type $* | more
+ifconfig=ipconfig
+ip=ipconfig
+clear=cls
+df=fsutil volume diskfree c:\
+
+tf=tree /f
+tf>=tree /f>tree.txt
+tf<=tree /f | clip
+.=cd ..
+\=cd \
+h=cd %USERPROFILE%\Documents\$1
+doc=cd %USERPROFILE%\Documents\doc
+bin=cd %USERPROFILE%\Documents\bin
+src=cd %USERPROFILE%\Documents\src
+
+fd=find "$1" $2
+sjis=chcp 932
+utf8=chcp 65001
+green=color 02
+red=color 04
+blue=color 03
+yellow=color 06
+touch=copy nul $1
+tc=copy nul $1
+tt=title %CD%
+
+gita=git add $*
+gitc=git commit
+gits=git status
+gitd=git diff $*
+gitds=git diff --staged
+gitl=git log
+gitlo=git log --oneline
+gitlp=git log -p $*
+gitln=git log -n $*
+gitrm=git rm $*
+gitrr=git rm -r $*
+gitrc=git rm --cached $*
+gitm=git mv $*
+gitpu=git push -u origin master
+gitp=git push
+gitch-=git checkout -- $*
+gitch.=git checkout -- .
+gitrs=git reset HEAD $*
+gitrs.=git reset HEAD .
+gitre=git remote -v
+gitbr=git branch $*
+gitld=git log --oneline --decorate
+gitch=git checkout $*
+gitmg=git merge $*
+gitmgo=git merge orign/master
