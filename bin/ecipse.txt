@@ -1,0 +1,22 @@
+<操作系>
+  (リソースを開く) ctrl + shift + R
+  (クリックアウトライン) ctrl + o (メソッド・フィールド検索）
+  (宣言を開く) F3
+  (型の階層表示) F4
+  (型の検索) Ctrl + Shift + T
+  (ファイルを閉じる) Ctrl + W (全て) + Shift
+  (ショートカットの表示) Ctrl + Shift + L (2回でキー割り当て画面)
+  (コメントアウト) Ctrl + / (複数行) + Shift
+  (括弧を行き来) Ctrl + Shift + P (Parenthesis)
+  (元の場所に戻る・進む) Alt + ←→
+  (単語移動) Ctrl + ←→
+  (編集タブの移動) Ctrl + E
+  (選択範囲の拡大縮小) Alt + Shift + ↑↓
+<編集系>
+  (クイックフィックス) Ctrl + 1
+  (フォーマット) Ctrl + Shift + F
+  (import文の編成) Ctrl + Shift + o
+  (テンプレート・プロポーザル) Ctrl + Space
+  (メソッドのシグネチャ変更) Alt + Shift + C
+  (リファクタリング・クイックメニュー) Alt + Shift + T
+    -> (定数の抽出) A
